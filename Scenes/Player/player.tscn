@@ -4,6 +4,10 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7i4tb"]
 
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7i4tb"]
+radius = 10.0
+height = 30.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1077865054]
 collision_mask = 2
 script = ExtResource("1_uvnfx")
@@ -46,3 +50,12 @@ collision_mask = 2
 position = Vector2(0, -13)
 target_position = Vector2(-11, 0)
 collision_mask = 2
+
+[node name="DashCooldownTimer" type="Timer" parent="." unique_id=1198058039]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1491215006]
+mesh = SubResource("CapsuleMesh_7i4tb")
+
+[connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
