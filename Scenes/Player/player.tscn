@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://4c4m2djnin2a"]
+
+[ext_resource type="Script" uid="uid://d2jpm46sd132g" path="res://Scenes/Player/player.gd" id="1_uvnfx"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7i4tb"]
+
+[node name="Player" type="CharacterBody2D" unique_id=1077865054]
+collision_mask = 2
+script = ExtResource("1_uvnfx")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=740440632]
+zoom = Vector2(2.5, 2.5)
+position_smoothing_enabled = true
+position_smoothing_speed = 10.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2020904538]
+shape = SubResource("CapsuleShape2D_7i4tb")
+
+[node name="ClimbingRays" type="Node2D" parent="." unique_id=672116137]
+unique_name_in_owner = true
+
+[node name="RayCastRight" type="RayCast2D" parent="ClimbingRays" unique_id=2079382323]
+target_position = Vector2(12, 0)
+collision_mask = 2
+
+[node name="RayCastLeft" type="RayCast2D" parent="ClimbingRays" unique_id=727366026]
+target_position = Vector2(-12, 0)
+collision_mask = 2
+
+[node name="RayCastFeetRight" type="RayCast2D" parent="ClimbingRays" unique_id=1002168814]
+position = Vector2(0, 13)
+target_position = Vector2(11, 0)
+collision_mask = 2
+
+[node name="RayCastFeetLeft" type="RayCast2D" parent="ClimbingRays" unique_id=579872765]
+position = Vector2(0, 13)
+target_position = Vector2(-11, 0)
+collision_mask = 2
+
+[node name="RayCastHeadRight" type="RayCast2D" parent="ClimbingRays" unique_id=365254019]
+position = Vector2(0, -13)
+target_position = Vector2(11, 0)
+collision_mask = 2
+
+[node name="RayCastHeadLeft" type="RayCast2D" parent="ClimbingRays" unique_id=455363260]
+position = Vector2(0, -13)
+target_position = Vector2(-11, 0)
+collision_mask = 2
