@@ -94,6 +94,9 @@ _data = {
 &"attack_right": SubResource("Animation_56vlx")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7i4tb"]
+size = Vector2(4, 31)
+
 [node name="Sword" type="Node2D" unique_id=158912194]
 script = ExtResource("1_cn3hn")
 
@@ -105,3 +108,11 @@ mesh = SubResource("BoxMesh_7i4tb")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1350484412]
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_56vlx")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1435845735]
+collision_layer = 8
+collision_mask = 34
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=115020741]
+position = Vector2(0, -12.5)
+shape = SubResource("RectangleShape2D_7i4tb")

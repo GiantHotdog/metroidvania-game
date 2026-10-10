@@ -246,5 +246,3 @@ tile_set = SubResource("TileSet_e2bkl")
 
 [node name="Player" parent="." unique_id=1077865054 instance=ExtResource("2_yp2ti")]
 position = Vector2(405, -307)
-
-[editable path="Player"]
