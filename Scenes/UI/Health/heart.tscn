@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://coxlajwi83dsa"]
+
+[ext_resource type="Texture2D" uid="uid://7a4ejiypmhkb" path="res://Assets/UI/health/heart_depleted.png" id="1_56yph"]
+[ext_resource type="Texture2D" uid="uid://ctqx25abfmloa" path="res://Assets/UI/health/heart.png" id="2_f264c"]
+[ext_resource type="Script" uid="uid://bmkb0obrbspc1" path="res://Scenes/UI/Health/heart.gd" id="3_f264c"]
+
+[node name="Heart" type="TextureProgressBar" unique_id=32197625]
+offset_right = 40.0
+offset_bottom = 40.0
+value = 100.0
+texture_under = ExtResource("1_56yph")
+texture_progress = ExtResource("2_f264c")
+script = ExtResource("3_f264c")

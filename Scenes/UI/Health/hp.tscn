@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://ci6133lg0kfym"]
+
+[ext_resource type="Script" uid="uid://pwr2gs4puf5v" path="res://Scenes/UI/Health/hp.gd" id="1_fl05g"]
+[ext_resource type="PackedScene" uid="uid://coxlajwi83dsa" path="res://Scenes/UI/Health/heart.tscn" id="2_7odbk"]
+
+[node name="Hp" type="MarginContainer" unique_id=768052364]
+custom_minimum_size = Vector2(80, 80)
+offset_bottom = 40.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+script = ExtResource("1_fl05g")
+heart_scene = ExtResource("2_7odbk")
+
+[node name="HpBar" type="HBoxContainer" parent="." unique_id=1631584697]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="Heart" parent="HpBar" unique_id=32197625 instance=ExtResource("2_7odbk")]
+layout_mode = 2

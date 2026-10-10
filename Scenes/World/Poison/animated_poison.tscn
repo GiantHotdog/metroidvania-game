@@ -1,0 +1,30 @@
+[gd_scene format=3 uid="uid://vsaeryh73y0v"]
+
+[ext_resource type="Texture2D" uid="uid://bp2i71di5to6l" path="res://Assets/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap_packed.png" id="1_ajsb2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0bk7u"]
+atlas = ExtResource("1_ajsb2")
+region = Rect2(234, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cv6ij"]
+atlas = ExtResource("1_ajsb2")
+region = Rect2(234, 18, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_7i4tb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0bk7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cv6ij")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 2.5
+}]
+
+[node name="AnimatedPoison" type="AnimatedSprite2D" unique_id=1459356384]
+sprite_frames = SubResource("SpriteFrames_7i4tb")
+autoplay = "default"
+frame_progress = 0.7185118

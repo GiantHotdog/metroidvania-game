@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://67vj6tpg256t"]
+
+[ext_resource type="PackedScene" uid="uid://ci6133lg0kfym" path="res://Scenes/UI/Health/hp.tscn" id="1_ahcct"]
+[ext_resource type="Script" uid="uid://bx8q7lshcle47" path="res://Scenes/UI/ui.gd" id="1_de23q"]
+
+[node name="UI" type="CanvasLayer" unique_id=1988663011]
+script = ExtResource("1_de23q")
+
+[node name="CenterContainer" type="CenterContainer" parent="." unique_id=293400918]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -80.0
+offset_right = 40.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_vertical = 4
+
+[node name="Hp" parent="CenterContainer" unique_id=768052364 instance=ExtResource("1_ahcct")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 4
+
+[editable path="CenterContainer/Hp"]

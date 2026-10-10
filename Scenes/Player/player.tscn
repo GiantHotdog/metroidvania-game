@@ -1,19 +1,28 @@
 [gd_scene format=3 uid="uid://4c4m2djnin2a"]
 
 [ext_resource type="Script" uid="uid://d2jpm46sd132g" path="res://Scenes/Player/player.gd" id="1_uvnfx"]
+[ext_resource type="PackedScene" uid="uid://cmqk1rr8yb8db" path="res://Scenes/Player/Weapons/sword.tscn" id="2_a3d8c"]
+[ext_resource type="PackedScene" uid="uid://67vj6tpg256t" path="res://Scenes/UI/ui.tscn" id="3_xpcdj"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7i4tb"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yp2ti"]
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.48471224, 0.48471224, 0.48471224, 1)
+
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7i4tb"]
+material = SubResource("StandardMaterial3D_yp2ti")
 radius = 10.0
 height = 30.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_vkv2p"]
 
 [node name="Player" type="CharacterBody2D" unique_id=1077865054]
 collision_mask = 2
 script = ExtResource("1_uvnfx")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=740440632]
-zoom = Vector2(2.5, 2.5)
+zoom = Vector2(2, 2)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 
@@ -58,4 +67,28 @@ one_shot = true
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=1491215006]
 mesh = SubResource("CapsuleMesh_7i4tb")
 
+[node name="Hand" type="Node2D" parent="." unique_id=610863827]
+unique_name_in_owner = true
+position = Vector2(10, 0)
+
+[node name="Sword" parent="Hand" unique_id=158912194 instance=ExtResource("2_a3d8c")]
+unique_name_in_owner = true
+
+[node name="UI" parent="." unique_id=1988663011 instance=ExtResource("3_xpcdj")]
+unique_name_in_owner = true
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=1243035877]
+unique_name_in_owner = true
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=2034397674]
+shape = SubResource("CapsuleShape2D_vkv2p")
+
+[node name="DamageCooldownTimer" type="Timer" parent="." unique_id=1378222997]
+unique_name_in_owner = true
+wait_time = 0.5
+one_shot = true
+
 [connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
+[connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="timeout" from="DamageCooldownTimer" to="." method="_on_damage_cooldown_timer_timeout"]

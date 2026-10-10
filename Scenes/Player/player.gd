@@ -19,9 +19,20 @@ var air_jumps_count:int = 0
 var gravity:int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_dash:bool = true
 
+const MAX_HEALTH:int = 40
+var health:int = 30
+var hp:HpBar
+
+var default_damage:int = 5
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	%Sword.visible = false
+	hp = %UI.get_hp_bar()
+	hp.heart_count = int(float(MAX_HEALTH) / hp.hp_per_heart)
+	await get_tree().process_frame
+	hp.hp = health
+	#hp.update_hearts()
 
 
 func can_climb_wall() -> Object:
@@ -44,7 +55,7 @@ func check_inputs(delta: float):
 			velocity.y = - air_jump_strength
 			air_jumps_count += 1
 	# Handle dashing
-	if Input.is_action_just_pressed("dash")and can_dash:
+	if Input.is_action_just_pressed("dash") and can_dash:
 		can_dash = false
 		%DashCooldownTimer.start()
 		velocity.x += last_moved_direction * dash_boost
@@ -56,8 +67,13 @@ func check_inputs(delta: float):
 	var direction = Input.get_axis("left", "right")
 	if not is_zero_approx(direction):
 		last_moved_direction = sign(direction)
+		%Hand.position = Vector2(10, 0) * direction
 	var movement = direction * move_speed
 	velocity.x = move_toward(velocity.x, movement, movement_acceleration * delta)
+	
+	# Handle attacking
+	if Input.is_action_just_pressed("attack"):
+		%Sword.attack(last_moved_direction)
 	
 	if is_on_floor() or can_climb_wall():
 		air_jumps_count = 0
@@ -95,3 +111,19 @@ func _process(delta: float) -> void:
 
 func _on_dash_cooldown_timer_timeout() -> void:
 	can_dash = true
+
+
+func damage(amount:int = 0):
+	health -= amount
+	hp.hp = health
+	%DamageCooldownTimer.start()
+
+
+func _on_damage_area_body_entered(body: Node2D) -> void:
+	damage(default_damage)
+	print("Damaged by body")
+
+
+func _on_damage_cooldown_timer_timeout() -> void:
+	if len(%DamageArea.get_overlapping_bodies()) > 0:
+		damage(default_damage)
