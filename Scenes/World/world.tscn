@@ -210,17 +210,20 @@ texture_region_size = Vector2i(18, 18)
 13:2/0/terrain_set = 0
 13:2/0/terrain = 3
 13:2/0/physics_layer_1/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+13:2/0/physics_layer_2/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
 13:2/0/terrains_peering_bit/top_side = 3
 13:1/next_alternative_id = 3
 13:1/0 = 0
 13:1/0/terrain_set = 0
 13:1/0/terrain = 3
 13:1/0/physics_layer_1/polygon_0/points = PackedVector2Array(-9, 9, 9, 9, 9, -5, -9, -5)
+13:1/0/physics_layer_2/polygon_0/points = PackedVector2Array(-9, 9, 9, 9, 9, -5, -9, -5)
 
 [sub_resource type="TileSet" id="TileSet_e2bkl"]
 tile_size = Vector2i(18, 18)
 physics_layer_0/collision_layer = 2
 physics_layer_1/collision_layer = 4
+physics_layer_2/collision_layer = 16
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Platform terrain"
 terrain_set_0/terrain_0/color = Color(1, 0, 0, 1)

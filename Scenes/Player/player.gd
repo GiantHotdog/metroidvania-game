@@ -11,6 +11,7 @@ extends CharacterBody2D
 @export var max_fall_velocity:float = 1200.0
 @export var wall_slip_speed:float = 65.0
 @export var dash_boost:float = 400.0
+@export var max_slow_fall_velocity:float = 100.0
 
 @export var max_air_jumps:int = 1
 
@@ -94,6 +95,8 @@ func limit_fall_speed():
 	# Limit y velocity to slip speed if on a wall
 	if can_climb_wall() and velocity.y > wall_slip_speed:
 		velocity.y = wall_slip_speed
+	if velocity.y > max_slow_fall_velocity and len(%SlowFallArea.get_overlapping_bodies()) > 0:
+		velocity.y = max_slow_fall_velocity
 
 
 func _physics_process(delta: float) -> void:
@@ -117,11 +120,11 @@ func damage(amount:int = 0):
 	health -= amount
 	hp.hp = health
 	%DamageCooldownTimer.start()
+	print("Damaged")
 
 
 func _on_damage_area_body_entered(body: Node2D) -> void:
 	damage(default_damage)
-	print("Damaged by body")
 
 
 func _on_damage_cooldown_timer_timeout() -> void:

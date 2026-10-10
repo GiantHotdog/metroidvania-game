@@ -84,6 +84,13 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=2034397674]
 shape = SubResource("CapsuleShape2D_vkv2p")
 
+[node name="SlowFallArea" type="Area2D" parent="." unique_id=1665165517]
+unique_name_in_owner = true
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SlowFallArea" unique_id=1745843164]
+shape = SubResource("CapsuleShape2D_vkv2p")
+
 [node name="DamageCooldownTimer" type="Timer" parent="." unique_id=1378222997]
 unique_name_in_owner = true
 wait_time = 0.5
@@ -91,4 +98,5 @@ one_shot = true
 
 [connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
+[connection signal="body_entered" from="SlowFallArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="timeout" from="DamageCooldownTimer" to="." method="_on_damage_cooldown_timer_timeout"]
