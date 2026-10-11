@@ -97,6 +97,9 @@ wait_time = 0.5
 one_shot = true
 
 [connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
+[connection signal="attack_finished" from="Hand/Sword" to="." method="_on_sword_attack_finished"]
+[connection signal="attack_started" from="Hand/Sword" to="." method="_on_sword_attack_started"]
+[connection signal="world_collision" from="Hand/Sword" to="." method="apply_sword_recoil_from_world"]
 [connection signal="body_entered" from="DamageArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="body_entered" from="SlowFallArea" to="." method="_on_damage_area_body_entered"]
 [connection signal="timeout" from="DamageCooldownTimer" to="." method="_on_damage_cooldown_timer_timeout"]

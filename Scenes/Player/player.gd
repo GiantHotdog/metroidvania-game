@@ -12,10 +12,14 @@ extends CharacterBody2D
 @export var wall_slip_speed:float = 65.0
 @export var dash_boost:float = 400.0
 @export var max_slow_fall_velocity:float = 100.0
-
 @export var max_air_jumps:int = 1
 
-var last_moved_direction = 1
+@export_category("Combat")
+@export var recoil_strength:float = 60.0
+@export var recoil_decay:float = 300.0
+
+var last_moved_direction:int = 1
+var last_moved_vertical_direction:int = 1
 var air_jumps_count:int = 0
 var gravity:int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_dash:bool = true
@@ -25,6 +29,10 @@ var health:int = 30
 var hp:HpBar
 
 var default_damage:int = 5
+
+var recoil_velocity:Vector2 = Vector2.ZERO
+
+var is_attacking = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -66,15 +74,27 @@ func check_inputs(delta: float):
 		pass
 	
 	var direction = Input.get_axis("left", "right")
+	var vertical_direction = Input.get_axis("attack_down", "attack_up")
+	
 	if not is_zero_approx(direction):
 		last_moved_direction = sign(direction)
-		%Hand.position = Vector2(10, 0) * direction
+	if not is_zero_approx(vertical_direction):
+		last_moved_vertical_direction = sign(vertical_direction)
+	if not is_attacking:
+		if (abs(direction) > 0.5) or (abs(vertical_direction) > 0.5):
+			if abs(vertical_direction) > abs(direction):
+				%Hand.position = Vector2(0, -12) * last_moved_vertical_direction
+			else:
+				%Hand.position = Vector2(10, 0) * last_moved_direction
 	var movement = direction * move_speed
 	velocity.x = move_toward(velocity.x, movement, movement_acceleration * delta)
 	
 	# Handle attacking
-	if Input.is_action_just_pressed("attack"):
-		%Sword.attack(last_moved_direction)
+	if Input.is_action_just_pressed("attack") and not is_attacking:
+		if abs(vertical_direction) > abs(direction):
+			%Sword.attack_vertical(sign(vertical_direction))
+		else:
+			%Sword.attack(direction)
 	
 	if is_on_floor() or can_climb_wall():
 		air_jumps_count = 0
@@ -99,11 +119,17 @@ func limit_fall_speed():
 		velocity.y = max_slow_fall_velocity
 
 
+func apply_recoil(delta:float):
+	recoil_velocity = recoil_velocity.move_toward(Vector2.ZERO, recoil_decay * delta)
+	velocity += recoil_velocity
+
+
 func _physics_process(delta: float) -> void:
 	check_inputs(delta)
 	apply_friction(delta)
 	apply_gravity(delta)
 	limit_fall_speed()
+	apply_recoil(delta)
 	
 	move_and_slide()
 
@@ -130,3 +156,15 @@ func _on_damage_area_body_entered(body: Node2D) -> void:
 func _on_damage_cooldown_timer_timeout() -> void:
 	if len(%DamageArea.get_overlapping_bodies()) > 0:
 		damage(default_damage)
+
+
+func apply_sword_recoil_from_world(normal:Vector2):
+	recoil_velocity = normal * recoil_strength
+
+
+func _on_sword_attack_finished() -> void:
+	is_attacking = false
+
+
+func _on_sword_attack_started() -> void:
+	is_attacking = true

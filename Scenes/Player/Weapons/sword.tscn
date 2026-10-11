@@ -31,6 +31,48 @@ tracks/1/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_alepj"]
+resource_name = "attack_left_2"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 0, 1),
+"update": 0,
+"values": [2.0943951023931953, 4.1887902047863905, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_finished"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_cn3hn"]
 resource_name = "attack_left"
 length = 0.4
@@ -44,7 +86,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 0, 1),
 "update": 0,
-"values": [0.0, -2.3561945, 0.0]
+"values": [-0.17453292519943295, -1.9198621771937625, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -57,6 +99,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_finished"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_56vlx"]
@@ -72,7 +128,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.4),
 "transitions": PackedFloat32Array(1, 0, 1),
 "update": 0,
-"values": [0.0, 2.356194490192345, 0.0]
+"values": [0.17453292519943295, 1.9198621771937625, 0.0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -86,18 +142,76 @@ tracks/1/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_finished"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_x5qcs"]
+resource_name = "attack_up"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 0, 1),
+"update": 0,
+"values": [-1.0471975511965976, 1.0471975511965976, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"_on_attack_finished"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_56vlx"]
 _data = {
 &"RESET": SubResource("Animation_nlifs"),
+&"attack_down": SubResource("Animation_alepj"),
 &"attack_left": SubResource("Animation_cn3hn"),
-&"attack_right": SubResource("Animation_56vlx")
+&"attack_right": SubResource("Animation_56vlx"),
+&"attack_up": SubResource("Animation_x5qcs")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_7i4tb"]
-size = Vector2(4, 31)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vkv2p"]
+size = Vector2(4, 6)
 
-[node name="Sword" type="Node2D" unique_id=158912194]
+[node name="Sword" type="Node2D" unique_id=398598885]
 script = ExtResource("1_cn3hn")
 
 [node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=495639704]
@@ -109,10 +223,14 @@ mesh = SubResource("BoxMesh_7i4tb")
 unique_name_in_owner = true
 libraries/ = SubResource("AnimationLibrary_56vlx")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1435845735]
-collision_layer = 8
-collision_mask = 34
+[node name="WorldShapeCast" type="ShapeCast2D" parent="." unique_id=1937349855]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_vkv2p")
+target_position = Vector2(0, -25)
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=115020741]
-position = Vector2(0, -12.5)
-shape = SubResource("RectangleShape2D_7i4tb")
+[node name="EnemyShapeCast" type="ShapeCast2D" parent="." unique_id=1191982634]
+unique_name_in_owner = true
+shape = SubResource("RectangleShape2D_vkv2p")
+target_position = Vector2(0, -25)
+collision_mask = 2
