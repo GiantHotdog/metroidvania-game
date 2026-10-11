@@ -81,7 +81,7 @@ func check_inputs(delta: float):
 	if not is_zero_approx(vertical_direction):
 		last_moved_vertical_direction = sign(vertical_direction)
 	if not is_attacking:
-		if (abs(direction) > 0.5) or (abs(vertical_direction) > 0.5):
+		if (abs(direction) > 0.3) or (abs(vertical_direction) > 0.3):
 			if abs(vertical_direction) > abs(direction):
 				%Hand.position = Vector2(0, -12) * last_moved_vertical_direction
 			else:
@@ -91,10 +91,14 @@ func check_inputs(delta: float):
 	
 	# Handle attacking
 	if Input.is_action_just_pressed("attack") and not is_attacking:
-		if abs(vertical_direction) > abs(direction):
-			%Sword.attack_vertical(sign(vertical_direction))
+		if (abs(direction) > 0.3) or (abs(vertical_direction) > 0.3):
+			if abs(vertical_direction) > abs(direction):
+				%Sword.attack_vertical(sign(vertical_direction))
+			else:
+				%Sword.attack(direction)
 		else:
-			%Sword.attack(direction)
+			%Hand.position = Vector2(10, 0) * last_moved_direction
+			%Sword.attack(last_moved_direction)
 	
 	if is_on_floor() or can_climb_wall():
 		air_jumps_count = 0
