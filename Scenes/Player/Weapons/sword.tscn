@@ -233,4 +233,4 @@ collision_mask = 2
 unique_name_in_owner = true
 shape = SubResource("RectangleShape2D_vkv2p")
 target_position = Vector2(0, -25)
-collision_mask = 2
+collision_mask = 32

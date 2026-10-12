@@ -100,7 +100,7 @@ attack_up={
 2d_physics/layer_3="Player damaging"
 2d_physics/layer_4="Enemy damaging"
 2d_physics/layer_5="Slow fall"
-2d_physics/layer_6="Enemies"
+2d_physics/layer_6="Enemy"
 
 [physics]
 

@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://bwnxnuu3g545v"]
+
+[ext_resource type="Script" uid="uid://bgs0qxdv7yt5f" path="res://Scenes/Enemies/BaseEnemy/base_enemy.gd" id="1_but3f"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ojk3f"]
+radius = 200.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_but3f"]
+radius = 9.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1cliv"]
+radius = 9.0
+
+[sub_resource type="SphereMesh" id="SphereMesh_7i4tb"]
+radius = 9.0
+height = 18.0
+
+[node name="BaseEnemy" type="CharacterBody2D" unique_id=585242206]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_but3f")
+
+[node name="TrackingArea" type="Area2D" parent="." unique_id=237514650]
+unique_name_in_owner = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrackingArea" unique_id=675995519]
+shape = SubResource("CircleShape2D_ojk3f")
+debug_color = Color(0, 1, 0, 0.41960785)
+
+[node name="AttackArea" type="Area2D" parent="." unique_id=1038598417]
+unique_name_in_owner = true
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" unique_id=2047214392]
+shape = SubResource("CircleShape2D_but3f")
+
+[node name="DamageArea" type="Area2D" parent="." unique_id=2014158511]
+unique_name_in_owner = true
+collision_layer = 32
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea" unique_id=1389019695]
+shape = SubResource("CircleShape2D_but3f")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2042827415]
+shape = SubResource("CircleShape2D_1cliv")
+
+[node name="MeshInstance2D" type="MeshInstance2D" parent="." unique_id=247219496]
+mesh = SubResource("SphereMesh_7i4tb")

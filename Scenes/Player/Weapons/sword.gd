@@ -1,4 +1,5 @@
-extends Node2D
+class_name Sword
+extends Weapon
 
 
 signal world_collision(normal:Vector2)
@@ -35,6 +36,11 @@ func _physics_process(delta: float) -> void:
 			var normal:Vector2 = %WorldShapeCast.get_collision_normal(0)
 			world_collision.emit(normal)
 			%WorldShapeCast.add_exception_rid(%WorldShapeCast.get_collider_rid(0))
+		if %EnemyShapeCast.is_colliding():
+			var enemy:BaseEnemy = %EnemyShapeCast.get_collider(0)
+			enemy_collision.emit(enemy)
+			enemy.hit(self, damage)
+			%EnemyShapeCast.add_exception_rid(%EnemyShapeCast.get_collider_rid(0))
 	else:
 		%WorldShapeCast.clear_exceptions()
 		%EnemyShapeCast.clear_exceptions()

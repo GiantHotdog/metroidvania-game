@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://vsaeryh73y0v" path="res://Scenes/World/Poison/animated_poison.tscn" id="1_3rhlx"]
 [ext_resource type="Texture2D" uid="uid://bp2i71di5to6l" path="res://Assets/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap_packed.png" id="1_t1gg8"]
 [ext_resource type="PackedScene" uid="uid://4c4m2djnin2a" path="res://Scenes/Player/player.tscn" id="2_yp2ti"]
+[ext_resource type="PackedScene" uid="uid://bwnxnuu3g545v" path="res://Scenes/Enemies/BaseEnemy/base_enemy.tscn" id="4_vadfg"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_vadfg"]
 scenes/1/scene = ExtResource("1_3rhlx")
@@ -245,4 +246,6 @@ tile_map_data = PackedByteArray("AAAHAAIAAQALAAYAAAAHAAEAAQALAAQAAAAHAAAAAQALAAQ
 tile_set = SubResource("TileSet_e2bkl")
 
 [node name="Player" parent="." unique_id=1077865054 instance=ExtResource("2_yp2ti")]
-position = Vector2(405, -307)
+position = Vector2(-162, -126)
+
+[node name="BaseEnemy" parent="." unique_id=585242206 instance=ExtResource("4_vadfg")]

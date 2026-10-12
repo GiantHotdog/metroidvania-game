@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 @export_category("Movement constants")
@@ -15,7 +16,7 @@ extends CharacterBody2D
 @export var max_air_jumps:int = 1
 
 @export_category("Combat")
-@export var recoil_strength:float = 60.0
+@export var recoil_strength:float = 50.0
 @export var recoil_decay:float = 300.0
 
 var last_moved_direction:int = 1
